@@ -7,7 +7,11 @@ class Solution {
 
     public void recursiveCall(int[] nums, int index, List<List<Integer>> finalAns){
         if(index > nums.length-1){
-            List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+
+            List<Integer> list = new ArrayList<>();
+            for(int i=0;i<nums.length;i++){
+                list.add(nums[i]);
+            }
             finalAns.add(list);
             return;
         }
