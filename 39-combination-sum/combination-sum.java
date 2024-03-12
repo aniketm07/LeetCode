@@ -7,18 +7,17 @@ class Solution {
     }
 
     public void recursiveCall(int[] candidates, int index, List<List<Integer>> finalAns, List<Integer> list, int target){
-        if(target == 0){
-            finalAns.add(list);
+        
+        if(index > candidates.length-1 || (index < candidates.length && candidates[index] > target)){
             return;
         }
-        if(index > candidates.length-1){
+        List<Integer> newList = new ArrayList<>(list);
+        newList.add(candidates[index]);
+        if(target==candidates[index]){
+            finalAns.add(newList);
             return;
         }
-        if(target > 0){
-            List<Integer> newList = new ArrayList<>(list);
-            newList.add(candidates[index]);
-            recursiveCall(candidates, index, finalAns, newList, target-candidates[index]);
-            recursiveCall(candidates, index+1, finalAns, list, target);
-        }
+        recursiveCall(candidates, index, finalAns, newList, target-candidates[index]);
+        recursiveCall(candidates, index+1, finalAns, list, target);
     }
 }
