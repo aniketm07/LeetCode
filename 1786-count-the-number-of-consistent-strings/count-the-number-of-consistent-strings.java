@@ -7,15 +7,19 @@ class Solution {
         }
         int count = 0;
         for(String word : words){
-            boolean flag = true;
-            for(int i=0;i<word.length();i++){
-                if(!characters[word.charAt(i)-97]){
-                    flag = false;
-                    break;
-                }
+            if(isPresent(word, characters)){
+                count++;
             }
-            count = flag ? count+1 :count;
         }
         return count;
+    }
+
+    public boolean isPresent(String word, boolean[] characters){
+        for(int i=0;i<word.length();i++){
+            if(!characters[word.charAt(i)-97]){
+                return false;
+            }
+        }
+        return true;
     }
 }
