@@ -8,7 +8,7 @@ class Solution {
 
     public void recursiveCall(int index, int remainingSum, int[] candidates, List<Integer> currentList, List<List<Integer>> finalAns){
         if(remainingSum==0){
-            finalAns.add(currentList);
+            finalAns.add(new ArrayList<>(currentList));
             return;
         }
         
@@ -22,9 +22,9 @@ class Solution {
             }
             if(prev!=candidates[i]){
                 prev = candidates[i];
-                List<Integer> list = new ArrayList<>(currentList);
-                list.add(candidates[i]);
-                recursiveCall(i+1, remainingSum-candidates[i], candidates, list, finalAns);
+                currentList.add(candidates[i]);
+                recursiveCall(i+1, remainingSum-candidates[i], candidates, currentList, finalAns);
+                currentList.remove(currentList.size()-1);
             }
         }
     }
