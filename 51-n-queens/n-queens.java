@@ -34,11 +34,13 @@ class Solution {
     }
 
     public Boolean checkClash(int row, int col, boolean[][] board, int n){
+        // check for the row and column
         for(int i=0;i<n;i++){
             if(board[row][i] || board[i][col]){
                 return true;
             }
         }
+        // check for clash in upper left diagonal
         int i=row-1;
         int j=col-1;
         while(checkBounds(i, j, n)){
@@ -47,14 +49,7 @@ class Solution {
             }
             i--;j--;
         }
-        i=row+1;
-        j=col+1;
-        while(checkBounds(i, j, n)){
-            if(board[i][j]){
-                return true;
-            }
-            i++;j++;
-        }
+        // check for clash in bottom left diagonal
         i=row+1;
         j=col-1;
         while(checkBounds(i, j, n)){
@@ -63,17 +58,10 @@ class Solution {
             }
             i++;j--;
         }
-        i=row-1;
-        j=col+1;
-        while(checkBounds(i, j, n)){
-            if(board[i][j]){
-                return true;
-            }
-            i--;j++;
-        }
         return false;
     }
 
+    // check for bounds
     public boolean checkBounds(int i, int j, int n){
         return i>=0 && j>=0 && i<n && j<n;
     }
