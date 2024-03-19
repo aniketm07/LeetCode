@@ -35,8 +35,8 @@ class Solution {
 
     public Boolean checkClash(int row, int col, boolean[][] board, int n){
         // check for the row and column
-        for(int i=0;i<n;i++){
-            if(board[row][i] || board[i][col]){
+        for(int i=0;i<=col;i++){
+            if(board[row][i]){
                 return true;
             }
         }
