@@ -6,7 +6,8 @@ class Solution {
 
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> ans = new ArrayList<>();
-        boolean[][] board = new boolean[n][n];
+        char[][] board = new char[n][n];
+        Arrays.stream(board).forEach(b -> Arrays.fill(b, '.'));
         left = new boolean[n];
         upperLeft = new boolean[2*n-1];
         bottomLeft = new boolean[2*n-1];
@@ -14,17 +15,13 @@ class Solution {
         return ans;
     }
 
-    public void nQueens(boolean[][] board, List<List<String>> ans, int col, int n){
+    public void nQueens(char[][] board, List<List<String>> ans, int col, int n){
         if(col == n){
             List<String> list = new ArrayList<>();
             for(int row=0;row<n;row++){
                 StringBuilder sb = new StringBuilder();
                 for(int column=0; column<n; column++){
-                    if(board[row][column]){
-                        sb.append("Q");
-                    }else{
-                        sb.append(".");
-                    }
+                    sb.append(board[row][column]);
                 }
                 list.add(sb.toString());
             }
@@ -33,8 +30,8 @@ class Solution {
         }
 
         for(int row=0;row<n;row++){
-            if(!checkClash(row, col, board, n)){
-                board[row][col] = true;
+            if(!checkClash(row, col, n)){
+                board[row][col] = 'Q';
                 left[row] = true;
                 bottomLeft[row+col] = true;
                 upperLeft[n-1 + col-row] = true;
@@ -42,12 +39,12 @@ class Solution {
                 left[row] = false;
                 bottomLeft[row+col] = false;
                 upperLeft[n-1 + col-row] = false;
-                board[row][col] = false;
+                board[row][col] = '.';
             }
         }
     }
 
-    public Boolean checkClash(int row, int col, boolean[][] board, int n){
+    public Boolean checkClash(int row, int col, int n){
         return left[row] || bottomLeft[row+col] || upperLeft[n-1 + col-row];
     }
 
