@@ -14,8 +14,9 @@ class Solution {
             return;
         }
         for(int i=index+1; i<=s.length(); i++){
-            if(isPalindrome(s.substring(index, i))){
-                currentList.add(s.substring(index, i));
+            String substr = s.substring(index, i);
+            if(isPalindrome(substr)){
+                currentList.add(substr);
                 recursionCall(s, i, currentList, finalAns);
                 currentList.remove(currentList.size()-1);
             }
