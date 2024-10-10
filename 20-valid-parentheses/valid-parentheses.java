@@ -3,27 +3,25 @@ class Solution {
         if(s.length()%2!=0){
             return false;
         }
-        Stack<Character> stack = new Stack<>();
-        List<Character> list = Arrays.asList('{', '[', '(');
-        Map<Character,Character> map = new HashMap<>() {{
-            put('}', '{');
-            put(')', '(');
-            put(']', '[');
-        }};
-        
-        for(char ch : s.toCharArray()){
-            if(list.contains(ch)){
-                stack.push(ch);
+        Stack<Character> stack = new Stack();
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='(' || s.charAt(i)=='{' || s.charAt(i)=='['){
+                stack.push(s.charAt(i));   
             }else{
-                if(stack.isEmpty()){
-                    return false;
-                }
-                Character pop = stack.pop();
-                if(map.get(ch)!=pop){
+                if(stack.isEmpty() || s.charAt(i)!=getChar(stack.pop())){
                     return false;
                 }
             }
         }
         return stack.isEmpty();
+    }
+    
+    public Character getChar(Character c){
+        switch(c){
+            case '{': return '}';
+            case '(': return ')';
+            case '[': return ']';
+            default : return null;
+        }
     }
 }
