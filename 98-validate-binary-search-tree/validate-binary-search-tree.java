@@ -15,26 +15,17 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        List<Integer> list = new ArrayList<Integer>();
-        inOrderTraversal(root, list);
-        return validate(list);
+        return traversal(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    public void inOrderTraversal(TreeNode root, List<Integer> list){
+    public boolean traversal(TreeNode root, Long min, Long max){
         if(root == null){
-            return;
+            return true;
         }
-        inOrderTraversal(root.left, list);
-        list.add(root.val);
-        inOrderTraversal(root.right, list);
-    }
-
-    public boolean validate(List<Integer> list){
-        for(int i=0;i<list.size()-1;i++){
-            if(list.get(i) >= list.get(i+1)){
-                return false;
-            }
+        // System.out.println((long)root.val);
+        if(min >= (long)root.val || max <= (long)root.val){
+            return false;
         }
-        return true;
+        return traversal(root.left, min, (long)root.val) && traversal(root.right, (long) root.val, max);
     }
 }
