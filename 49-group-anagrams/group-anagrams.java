@@ -9,10 +9,7 @@ class Solution {
             list.add(s);
             map.put(charMap, list);
         }
-        for (Map.Entry<Map<Character, Integer>, List<String>> entry : map.entrySet()) {
-            finalAns.add(entry.getValue());
-        }
-        return finalAns;
+        return new ArrayList<>(map.values());
     }
 
     private Map<Character, Integer> createCharMap(String str){
