@@ -1,20 +1,40 @@
 class ParkingSystem {
 
-    Map<Integer, Integer> map = new HashMap<>();
+    int big,medium,small;
 
     public ParkingSystem(int big, int medium, int small) {
-        map.put(1, big);
-        map.put(2, medium);
-        map.put(3, small);
+        this.big=big;
+        this.medium = medium;
+        this.small = small;
     }
     
     public boolean addCar(int carType) {
-        int noOfCars = map.get(carType);
-        if(noOfCars <= 0){
+        if (carType==1){
+            if (this.big>=1){
+                this.big--;
+                return true;
+            } else{
             return false;
+            }
         }
-        map.put(carType, noOfCars-1);
-        return true;
+        else if (carType==2){
+            if (this.medium>=1){
+                this.medium--;
+                return true;
+            } else{
+            return false;
+            }
+        }
+        else if (carType==3){
+            if (this.small>=1){
+                this.small--;
+                return true;
+            } else{
+            return false;
+            }
+        }
+        return false;
+        
     }
 }
 
