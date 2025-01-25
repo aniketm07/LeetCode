@@ -1,26 +1,25 @@
 class Solution {
     public boolean isIsomorphic(String s, String t) {
-        int[] indexS = new int[200];
-        int[] indexT = new int[200]; 
-
-        int len = s.length();
-        
-        if(len != t.length()) {
-            return false;
-        }
-        for(int i = 0; i < len; i++) {
-            // Check if the index of the current character in string s
-            // is different from the index of the corresponding character in string t
-            if(indexS[s.charAt(i)] != indexT[t.charAt(i)]) {
-                return false; // If different, strings are not isomorphic
+        Map<Character,Character> map = new HashMap<>();
+        Map<Character,Character> map2 = new HashMap<>();
+        char ch1,ch2;
+        for(int i=0;i<s.length();i++) {
+            ch1 = s.charAt(i);
+            ch2 = t.charAt(i); 
+            if(map.containsKey(ch1)) {
+                if (ch2 != map.get(ch1)) {
+                    return false;
+                }
             }
-            
-            // Update the indices of characters in both strings
-            indexS[s.charAt(i)] = i + 1; // updating index of current character
-            indexT[t.charAt(i)] = i + 1; // updating index of current character
+            else if(map2.containsKey(ch2)) {
+                return false;
+            }
+            else {
+                map.put(ch1,ch2);
+                map2.put(ch2,ch1);
+            }
+
         }
-        
-        // If the loop completes without returning false, strings are isomorphic
         return true;
     }
 }
