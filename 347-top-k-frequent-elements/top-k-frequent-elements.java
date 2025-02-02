@@ -4,20 +4,22 @@ class Solution {
         for(int i : nums){
             map.put(i, map.getOrDefault(i, 0) + 1);
         }
+        List<Integer>[] bucketList = new ArrayList[nums.length+1];
         int[] ans = new int[k];
-        int i=0;
-        Iterable<Map.Entry<Integer, Integer>> iterable = () -> map.entrySet().stream()
-            .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-            .iterator();
-
-        for (Map.Entry<Integer, Integer> entry : iterable) {
-            if(i>k-1){
-                break;
+        int j=0;
+        map.entrySet().stream().forEach(element -> {
+            if (bucketList[element.getValue()]==null)
+                bucketList[element.getValue()] = new ArrayList<>();
+            bucketList[element.getValue()].add(element.getKey());
+        });
+        for(int i=bucketList.length-1; i>=0 && j<k; i--){
+            if(bucketList[i]!=null){
+                for(int num : bucketList[i]){
+                    ans[j] = num;
+                    j++;
+                }
             }
-            ans[i] = entry.getKey();
-            i++;
         }
-            
         return ans;
     }
 }
