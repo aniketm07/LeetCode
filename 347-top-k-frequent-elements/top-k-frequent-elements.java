@@ -7,7 +7,7 @@ class Solution {
         List<Integer>[] bucketList = new ArrayList[nums.length+1];
         int[] ans = new int[k];
         int j=0;
-        map.entrySet().stream().forEach(element -> {
+        map.entrySet().parallelStream().forEach(element -> {
             if (bucketList[element.getValue()]==null)
                 bucketList[element.getValue()] = new ArrayList<>();
             bucketList[element.getValue()].add(element.getKey());
