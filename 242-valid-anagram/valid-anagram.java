@@ -22,12 +22,6 @@ class Solution {
                 return false;
             }
         }
-
-        // for(Integer i : map.values()){
-        //     if(i!=0){
-        //         return false;
-        //     }
-        // }
         return true;
     }
 }
