@@ -23,11 +23,11 @@ class Solution {
             }
         }
 
-        for(Integer i : map.values()){
-            if(i!=0){
-                return false;
-            }
-        }
+        // for(Integer i : map.values()){
+        //     if(i!=0){
+        //         return false;
+        //     }
+        // }
         return true;
     }
 }
