@@ -15,7 +15,6 @@ class Solution {
                 if(nums[i]==lastNumber){
                     continue;
                 }else{
-                    max = current > max ? current : max;
                     current = 1;
                 }
             }
