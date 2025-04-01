@@ -1,12 +1,15 @@
 class Solution {
     public int minimumOperations(int[] nums) {
-        Set<Integer> hashSet = new HashSet<>();
-
-        for(int i=0;i<nums.length;i++){
-            if(nums[i]!=0){
-                hashSet.add(nums[i]);
-            }   
+        int[] cnt = new int[101];
+        int res = 0;
+        for (int num : nums) {
+            if (num != 0) {
+                cnt[num]++;
+                if (cnt[num] == 1) {
+                    res++;
+                }
+            }
         }
-        return hashSet.size();
+        return res;
     }
 }
