@@ -9,21 +9,17 @@ class Solution {
         int left = 0;
         int right = 0;
         int max = 1;
+        HashSet<Character> set = new HashSet<>();
         while(right<s.length()){
-            if(checkExists(s.substring(left, right), s.charAt(right)) == -1){
+            if(!set.contains(s.charAt(right))){
+                set.add(s.charAt(right));
+                max = Math.max(max, right - left + 1);
                 right++;
             }else{
-                while(s.charAt(left)!=s.charAt(right)){
-                    left++;
-                }
+                set.remove(s.charAt(left));
                 left++;
             }
-            max = Math.max(right-left, max);
         }
         return max;
-    }
-
-    public int checkExists(String s, char ch){
-        return s.indexOf(ch);
     }
 }
