@@ -13,7 +13,7 @@ class Solution {
             if(checkExists(s.substring(left, right), s.charAt(right)) == -1){
                 right++;
             }else{
-                while(s.charAt(left)!=s.charAt(right) && left<=right){
+                while(s.charAt(left)!=s.charAt(right)){
                     left++;
                 }
                 left++;
