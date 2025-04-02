@@ -10,7 +10,7 @@ class Solution {
         int right = 0;
         int max = 1;
         while(right<s.length()){
-            if(!checkExists(s.substring(left, right), s.charAt(right))){
+            if(checkExists(s.substring(left, right), s.charAt(right)) == -1){
                 right++;
             }else{
                 while(s.charAt(left)!=s.charAt(right) && left<=right){
@@ -23,7 +23,7 @@ class Solution {
         return max;
     }
 
-    public boolean checkExists(String s, char ch){
-        return s.indexOf(ch)==-1 ? false : true;
+    public int checkExists(String s, char ch){
+        return s.indexOf(ch);
     }
 }
