@@ -10,8 +10,6 @@ class Solution {
         int right = 0;
         int max = 1;
         while(right<s.length()){
-            System.out.println("Substring: " + s.substring(left, right) + " For Character: " + s.charAt(right));
-            System.out.println("CheckExist: " + checkExists(s.substring(left, right), s.charAt(right)));
             if(!checkExists(s.substring(left, right), s.charAt(right))){
                 right++;
             }else{
@@ -20,9 +18,6 @@ class Solution {
                 }
                 left++;
             }
-            System.out.println("Left: "+ left + " Right: " + right);
-            System.out.println();
-            System.out.println();
             max = Math.max(right-left, max);
         }
         return max;
