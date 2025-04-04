@@ -22,7 +22,9 @@ class Solution {
         int left = height(root.left);
         int right = height(root.right);
         max = Math.max(left+right, max);
-        return Math.max(max, Math.max(diameterOfBinaryTree(root.left), diameterOfBinaryTree(root.right)));
+        diameterOfBinaryTree(root.left);
+        diameterOfBinaryTree(root.right);
+        return max;
     }
 
     public int height(TreeNode root){
