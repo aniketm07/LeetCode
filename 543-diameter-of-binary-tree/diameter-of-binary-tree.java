@@ -19,11 +19,7 @@ class Solution {
         if(root == null){
             return 0;
         }
-        int left = height(root.left);
-        int right = height(root.right);
-        max = Math.max(left+right, max);
-        diameterOfBinaryTree(root.left);
-        diameterOfBinaryTree(root.right);
+        height(root);
         return max;
     }
 
@@ -33,6 +29,7 @@ class Solution {
         }
         int left = height(root.left);
         int right = height(root.right);
-        return 1+Math.max(left, right);
+        max = Math.max(left+right, max);
+        return 1 + Math.max(left, right);
     }
 }
