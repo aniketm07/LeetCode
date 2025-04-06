@@ -15,30 +15,27 @@ class Node {
 
 class Solution {
     public Node copyRandomList(Node head) {
-        Node tempHead = head;
-        Node dummyNode = new Node(-1);
-        Node newListHead = dummyNode;
+        Node dummy = head;
         Map<Node, Node> nodeMap = new HashMap<>();
-        while(tempHead != null){
-            Node newNode = new Node(tempHead.val);
-            dummyNode.next = newNode;
-            nodeMap.put(tempHead, newNode);
-            dummyNode = dummyNode.next;
-            // System.out.println("New List: " + dummyNode.val + " OG List: " + tempHead.val);
-            tempHead = tempHead.next;
+        Node prev = null;
+        while(dummy!=null){
+            Node node = new Node(dummy.val);
+            nodeMap.put(dummy, node);
+            if(prev!=null){
+                prev.next = node;
+            }
+            prev = node;
+            dummy = dummy.next;
         }
-        tempHead = head;
-        while(tempHead != null){
-            Node randomPointer = tempHead.random;
-            Node currentPositionNode = nodeMap.get(tempHead);
-            currentPositionNode.random = nodeMap.get(randomPointer);
-            tempHead = tempHead.next;
+        Node newHead = nodeMap.get(head);
+        Node dummyHead = newHead;
+        dummy = head;
+        while(dummy!=null){
+            Node random = nodeMap.get(dummy.random);
+            dummyHead.random = random;
+            dummyHead = dummyHead.next;
+            dummy = dummy.next;
         }
-        return newListHead.next;
-    } 
+        return newHead;
+    }
 }
-
-/*
-(7,null, null)
-
-*/
