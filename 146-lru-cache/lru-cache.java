@@ -45,9 +45,8 @@ class LRUCache {
             ListNode node = new ListNode(key, value);
             if(map.size() >= capacity){
                 ListNode toBeDeleted = tail.prev;
+                removeNode(toBeDeleted);
                 map.remove(toBeDeleted.key);
-                toBeDeleted.prev.next = toBeDeleted.next;
-                tail.prev = toBeDeleted.prev;
             }
             map.put(node.key, node);
             addNode(node);
