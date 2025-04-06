@@ -49,12 +49,12 @@ class LRUCache {
                 toBeDeleted.prev.next = toBeDeleted.next;
                 tail.prev = toBeDeleted.prev;
             }
+            map.put(node.key, node);
             addNode(node);
         }
     }
 
     public void addNode(ListNode node){
-        map.put(node.key, node);
         node.next = head.next;
         head.next.prev = node;
         node.prev = head;
