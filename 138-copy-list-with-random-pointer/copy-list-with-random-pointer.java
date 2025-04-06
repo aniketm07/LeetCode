@@ -30,16 +30,16 @@ class Solution {
             temp = temp.next.next;
         }
         temp = head;
-        Node newHead = temp.next;
-        Node ansHead = newHead;
+        Node dNode = new Node(-1);
+        Node res = dNode;
         while(temp!=null){
-            temp.next = newHead.next;
+            dNode.next = temp.next;
             if(temp.next!=null){
-                newHead.next = temp.next.next;
+                temp.next = temp.next.next;
             }
             temp = temp.next;
-            newHead = newHead.next;
+            dNode = dNode.next;
         }
-        return ansHead;
+        return res.next;
     }
 }
