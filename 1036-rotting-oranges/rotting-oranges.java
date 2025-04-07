@@ -31,7 +31,7 @@ class Solution {
                 int newRow = row + dir[0];
                 int newCol = col + dir[1];
                 if (newRow >= 0 && newRow < n && newCol >= 0 && newCol < m && grid[newRow][newCol] == 1) {
-                    grid[newRow][newCol] = 2;
+                    grid[newRow][newCol] = -1;
                     int[] arr = {newRow, newCol};
                     queue.offer(new Pair(arr, timer+1));
                     made++;
