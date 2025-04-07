@@ -41,20 +41,18 @@ class Solution {
             visited[i][j-1] = true;
             queue.offer(new Pair(i,j-1));
         }
-        // System.out.println("Standing at (" +i +","+j+")");
-        // Print(visited);
         while(queue.size() > 0){
             Pair<Integer, Integer> pair = queue.poll();
             bfs(grid, visited, pair.getKey(), pair.getValue(), queue, n, m);
         }
     }
 
-    public void Print(boolean[][] array){
-        for (boolean[] x : array) {
-            for (boolean y : x){
-                System.out.print(y + " ");
-            }
-            System.out.println();
-        }
-    }
+    // public void Print(boolean[][] array){
+    //     for (boolean[] x : array) {
+    //         for (boolean y : x){
+    //             System.out.print(y + " ");
+    //         }
+    //         System.out.println();
+    //     }
+    // }
 }
