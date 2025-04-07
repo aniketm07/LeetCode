@@ -1,47 +1,51 @@
+import java.util.*;
+
 class Solution {
     public int orangesRotting(int[][] grid) {
-        int countFresh = 0;
-        Queue<Pair<int[], Integer>> queue = new LinkedList<>();
-        for(int i=0; i<grid.length; i++){
-            for(int j=0; j<grid[0].length; j++){
-                if(grid[i][j]==2){
-                    int[] arr = {i, j};
-                    queue.offer(new Pair(arr, 0));
+        int rows = grid.length, cols = grid[0].length;
+        Queue<int[]> queue = new LinkedList<>();
+        int fresh = 0;
+
+        // Step 1: Add all initial rotten oranges to the queue
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (grid[r][c] == 2) {
+                    queue.offer(new int[]{r, c});
+                } else if (grid[r][c] == 1) {
+                    fresh++;
                 }
-                if(grid[i][j]==1) countFresh++;
             }
         }
+
         // No fresh oranges to begin with
-        if (countFresh == 0) return 0;
-        
-        return bfs(grid, queue, countFresh);
-    }
+        if (fresh == 0) return 0;
 
-    public int bfs(int[][] grid, Queue<Pair<int[], Integer>> queue, int countFresh){
-        int n = grid.length;
-        int m = grid[0].length;
-        int made = 0;
-        int timer = 0;
+        int[][] directions = {{0,1},{1,0},{0,-1},{-1,0}};
+        int minutes = 0;
 
-        while(!queue.isEmpty()){
-            Pair<int[], Integer> pair = queue.poll();
-            int row = pair.getKey()[0];
-            int col = pair.getKey()[1];
-            int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-            timer = pair.getValue();
-            for (int[] dir : directions) {
-                int newRow = row + dir[0];
-                int newCol = col + dir[1];
-                if (newRow >= 0 && newRow < n && newCol >= 0 && newCol < m && grid[newRow][newCol] == 1) {
-                    grid[newRow][newCol] = -1;
-                    int[] arr = {newRow, newCol};
-                    queue.offer(new Pair(arr, timer+1));
-                    made++;
+        // Step 2: BFS to infect adjacent fresh oranges
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            boolean rottedThisMinute = false;
+
+            for (int i = 0; i < size; i++) {
+                int[] pos = queue.poll();
+                for (int[] dir : directions) {
+                    int r = pos[0] + dir[0];
+                    int c = pos[1] + dir[1];
+
+                    if (r >= 0 && r < rows && c >= 0 && c < cols && grid[r][c] == 1) {
+                        grid[r][c] = 2;
+                        queue.offer(new int[]{r, c});
+                        fresh--;
+                        rottedThisMinute = true;
+                    }
                 }
             }
+
+            if (rottedThisMinute) minutes++;
         }
 
-        if(made==countFresh) return timer;
-        return -1;
+        return fresh == 0 ? minutes : -1;
     }
 }
