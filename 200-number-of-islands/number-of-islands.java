@@ -6,7 +6,7 @@ class Solution {
         for(int i=0; i<n; i++){
             for(int j=0;j<m;j++){
                 if(grid[i][j] == '1'){
-                    bfs(grid, i, j, n, m);
+                    dfs(grid, i, j, n, m);
                     count++;
                 }
             }
@@ -14,16 +14,16 @@ class Solution {
         return count;
     }
 
-    public void bfs(char[][] grid, int i, int j, int n, int m){
+    public void dfs(char[][] grid, int i, int j, int n, int m){
         if(i<0 || i>= n || j<0 || j>= m){
             return;
         }
         if(grid[i][j]=='1'){
             grid[i][j]='X';
-            bfs(grid,i-1,j,n,m);
-            bfs(grid,i+1,j,n,m);
-            bfs(grid,i,j-1,n,m);
-            bfs(grid,i,j+1,n,m);
+            dfs(grid,i-1,j,n,m);
+            dfs(grid,i+1,j,n,m);
+            dfs(grid,i,j-1,n,m);
+            dfs(grid,i,j+1,n,m);
         }
     }
 
