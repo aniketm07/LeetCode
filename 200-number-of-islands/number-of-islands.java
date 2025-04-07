@@ -7,11 +7,7 @@ class Solution {
         for(int i=0; i<n; i++){
             for(int j=0;j<m;j++){
                 if(grid[i][j] == '1' && !visited[i][j]){
-                    Queue<Pair<Integer, Integer>> queue = new LinkedList<>();
-                    queue.offer(new Pair(0,1));
-                    visited[i][j] = true;
-                    Pair<Integer, Integer> pair = queue.poll();
-                    bfs(grid, visited, i, j, queue, n, m);
+                    bfs(grid, visited, i, j, n, m);
                     count++;
                 }
             }
@@ -19,8 +15,9 @@ class Solution {
         return count;
     }
 
-    public void bfs(char[][] grid, boolean[][] visited, int i, int j, Queue<Pair<Integer, Integer>> queue, int n, int m){
-        
+    public void bfs(char[][] grid, boolean[][] visited, int i, int j, int n, int m){
+        Queue<Pair<Integer, Integer>> queue = new LinkedList<>();
+        visited[i][j] = true;
         // TOP
         if(i-1>=0 && grid[i-1][j] == '1' && !visited[i-1][j]){
             visited[i-1][j] = true;
@@ -43,7 +40,7 @@ class Solution {
         }
         while(queue.size() > 0){
             Pair<Integer, Integer> pair = queue.poll();
-            bfs(grid, visited, pair.getKey(), pair.getValue(), queue, n, m);
+            bfs(grid, visited, pair.getKey(), pair.getValue(), n, m);
         }
     }
 
