@@ -11,6 +11,8 @@ class Solution {
                 if(grid[i][j]==1) countFresh++;
             }
         }
+        // No fresh oranges to begin with
+        if (countFresh == 0) return 0;
         
         return bfs(grid, queue, countFresh);
     }
