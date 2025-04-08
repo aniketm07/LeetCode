@@ -8,8 +8,8 @@ class Solution {
         for(int i=0;i<numCourses;i++) indegree[i] = 0;
         
         for(int[] edge : prerequisites){
-            list.get(edge[0]).add(edge[1]);
-            indegree[edge[1]]++;
+            list.get(edge[1]).add(edge[0]);
+            indegree[edge[0]]++;
         }
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < numCourses; i++) {
