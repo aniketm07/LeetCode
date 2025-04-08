@@ -19,41 +19,20 @@ class Node {
 */
 
 class Solution {
-    public Node cloneGraph(Node root) {
-        if(root == null){
-            return null;
+    public Node cloneGraph(Node node) {
+        if (node == null) return null;
+        return cloneNode(node, new HashMap<>());
+    }
+    public Node cloneNode(Node node, Map<Node, Node> oldToNew) {
+        if (oldToNew.containsKey(node)) return oldToNew.get(node);
+        Node newNode = new Node(node.val);
+        oldToNew.put(node, newNode);
+        List<Node> neighbors = node.neighbors;
+        List<Node> newNodeNeighbors = new ArrayList<>();
+        for (Node nei : neighbors) {
+            newNodeNeighbors.add(cloneNode(nei, oldToNew));
         }
-        Node res = null;
-        Map<Node, Node> map = new HashMap<>();
-        Queue<Node> queue = new LinkedList<>();
-        Set<Node> set = new HashSet<>();
-        queue.offer(root);
-        set.add(root);
-        while(!queue.isEmpty()){
-            Node node = queue.poll();
-            Node newNode = new Node(node.val);
-            System.out.println(node.val);
-            map.put(node, newNode);
-            if(res == null){
-                res = newNode;
-            }
-            for(Node adj : node.neighbors){
-                if(!set.contains(adj)){
-                    queue.offer(adj);
-                    set.add(adj);
-                }
-            }
-        }
-
-        for (Map.Entry<Node, Node> entry : map.entrySet()) {
-            Node key = entry.getKey();
-            Node value = entry.getValue();
-            value.neighbors = new ArrayList<>();
-            for(Node adj : key.neighbors){
-                value.neighbors.add(map.get(adj));
-            }
-        }
-
-        return res;
+        newNode.neighbors = newNodeNeighbors;
+        return newNode;
     }
 }
