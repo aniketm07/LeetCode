@@ -15,17 +15,22 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        return traversal(root, Long.MIN_VALUE, Long.MAX_VALUE);
-    }
-
-    public boolean traversal(TreeNode root, Long min, Long max){
-        if(root == null){
+        if(root.left == null && root.right == null){
             return true;
         }
-        // System.out.println((long)root.val);
-        if(min >= (long)root.val || max <= (long)root.val){
-            return false;
+        return checkValidity(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public boolean checkValidity(TreeNode node, long low, long high){
+        if(node == null){
+            return true;
         }
-        return traversal(root.left, min, (long)root.val) && traversal(root.right, (long) root.val, max);
+        
+        if(low < node.val && node.val < high){
+            if(checkValidity(node.left, low, node.val)){
+                return checkValidity(node.right, node.val, high);
+            }
+        }
+        return false;
     }
 }
