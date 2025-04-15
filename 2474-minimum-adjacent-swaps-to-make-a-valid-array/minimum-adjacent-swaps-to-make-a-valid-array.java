@@ -17,26 +17,28 @@ class Solution {
         }
         int count = 0;
         if(lIndex > hIndex){
-            hIndex++;
+            count = lIndex+n-1-hIndex-1;
+        }else{
+            count = lIndex+n-1-hIndex;
         }
 
-        while(lIndex != 0){
-            swap(lIndex, lIndex-1, nums);
-            lIndex--;
-            count++;
-        }
+        // while(lIndex != 0){
+        //     swap(lIndex, lIndex-1, nums);
+        //     lIndex--;
+        //     count++;
+        // }
 
-        while(hIndex!=n-1){
-            swap(hIndex, hIndex+1, nums);
-            hIndex++;
-            count++;
-        }
+        // while(hIndex!=n-1){
+        //     swap(hIndex, hIndex+1, nums);
+        //     hIndex++;
+        //     count++;
+        // }
         return count;
     }
 
-    public void swap(int i, int j, int[] nums) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
+    // public void swap(int i, int j, int[] nums) {
+    //     int temp = nums[i];
+    //     nums[i] = nums[j];
+    //     nums[j] = temp;
+    // }
 }
