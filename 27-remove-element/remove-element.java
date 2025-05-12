@@ -4,7 +4,6 @@ class Solution {
         int i = 0;
         int count = 0;
         while(i<=nums.length-1 && nums[i]!=-1){
-            System.out.println("At i=" + i);
             if(nums[i] == val){
                 nums[i] = nums[p];
                 nums[p] = -1;
@@ -13,15 +12,7 @@ class Solution {
             }else{
                 i++;
             }
-            printArray(nums);
         }
         return nums.length - count;
-    }
-
-    public void printArray(int[] nums){
-        for(int i : nums){
-            System.out.print(i + ",");
-        }
-        System.out.println();
     }
 }
